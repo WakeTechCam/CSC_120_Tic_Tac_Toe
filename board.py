@@ -14,8 +14,49 @@ for row in range(3):
   for column in range(3):
     board[row].append('-')
 
-def print_board(board):
+def print_board():
   for row in board:
     print (" ".join(row))
 
-print_board(board)
+def check_mark(row,col):
+  if row > 2 or col > 2 or row < 0 or col < 0:
+    return False  
+
+  return board[row][col] != 'x' and board[row][col] != 'o'
+
+def place_mark(row, col, player_id):
+  if player_id == 1:
+    board[row][col] = 'x'
+  else:
+    board[row][col] = 'o'
+
+def check_win():
+  pass
+
+player_id = 1
+
+while True:
+  print_board()
+
+  if player_id == 1:
+    print('Player 1\'s turn')
+  else:
+    print('Player 2\'s turn')
+
+  print('Enter row number (0-2)')
+  row = int(input())
+
+  print('Enter column number (0-2)')
+  col = int(input())
+
+  if not check_mark(row, col):
+    print('Please enter a row and column that hasn\'t been taken')
+    continue
+
+  place_mark(row, col, player_id)
+
+  if player_id == 1:
+    player_id = 2
+  else:
+    player_id = 1111
+    00
