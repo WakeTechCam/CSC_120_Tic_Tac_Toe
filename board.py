@@ -31,7 +31,38 @@ def place_mark(row, col, player_id):
     board[row][col] = 'o'
 
 def check_win():
-  pass
+  for rows in range(len(board)):
+    if board[rows][0] == 'x' and board[rows][1] == 'x' and board[rows][2] == 'x':
+      return 1
+    elif board[rows][0] == 'o' and board[rows][1] == 'o' and board[rows][2] == 'o':
+      return 2
+
+  for columns in range(len(board)):
+    if board[0][columns] == 'x' and board[1][columns] == 'x' and board[2][columns] == 'x':
+      return 1
+    elif board[0][columns] == 'o' and board[1][columns] == 'o' and board[2][columns] == 'o':
+      return 2
+
+  if board[0][0] == 'x' and board[1][1] == 'x' and board[2][2] == 'x':
+    return 1
+  elif board[0][0] == 'o' and board[1][1] == 'o' and board[1][2] == 'o':
+    return 2
+
+  if board[0][2] == 'x' and board[1][1] == 'x' and board[2][0] == 'x':
+    return 1
+  elif board[0][2] == 'o' and board[1][1] == 'o' and board[2][0] == 'o':
+    return 2
+
+  available_moves = 0
+  for i in range(len(board)):
+    for j in range(len(board)):
+      if check_mark(i, j):
+        available_moves += 1
+
+  if available_moves == 0:
+    return -1
+  else:
+    return 0
 
 player_id = 1
 
@@ -55,8 +86,22 @@ while True:
 
   place_mark(row, col, player_id)
 
+  winner = check_win()
+
+  if winner == 1:
+    print('Player 1 wins!')
+    print_board()
+    break
+  elif winner == 2:
+    print('Player 2 wins!')
+    print_board()
+    break
+  elif winner == -1:
+    print('Stalemate')
+    print_board()
+    break
+
   if player_id == 1:
     player_id = 2
   else:
-    player_id = 1111
-    00
+    player_id = 1
